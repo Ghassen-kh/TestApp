@@ -1,18 +1,15 @@
 package sample.model;
 
+
 public class Attempt {
     private String mMessage;
-    private final int mRemainingSeconds;
-    private final AttemptKind mKind;
+    private int mRemainingSeconds;
+    private AttemptKind mKind;
 
-    public Attempt(AttemptKind kind, String message) {
-        mKind = kind;
+    public Attempt(AttemptKind kind,String message ) {
         mMessage = message;
+        mKind = kind;
         mRemainingSeconds = kind.getTotalSeconds();
-    }
-
-    public AttemptKind getKind() {
-        return mKind;
     }
 
     public String getMessage() {
@@ -23,7 +20,28 @@ public class Attempt {
         return mRemainingSeconds;
     }
 
+    public AttemptKind getKind() {
+        return mKind;
+    }
+
     public void setMessage(String message) {
         mMessage = message;
+    }
+
+    public void tick() {
+        mRemainingSeconds--;
+    }
+
+    @Override
+    public String toString() {
+        return "Attempt{" +
+                "mMessage='" + mMessage + '\'' +
+                ", mRemainingSeconds=" + mRemainingSeconds +
+                ", mKind=" + mKind +
+                '}';
+    }
+
+    public void save() {
+        System.out.printf("Saving: %s %n",this);
     }
 }
